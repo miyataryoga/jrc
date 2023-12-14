@@ -2,36 +2,47 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
-    color: #333;
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+main {
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 form {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-p {
+.form-group {
     margin-bottom: 15px;
 }
 
 input {
-    width: 100%;
+    width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 10px;
     box-sizing: border-box;
+    display: inline-block;
 }
 
 button {
     padding: 10px;
     cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #values {
@@ -43,7 +54,7 @@ button {
 }
 
 button:hover {
-    background-color: #333;
+    background-color: #555;
     color: #fff;
 }
 

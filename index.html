@@ -1,64 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>報告（テンプレート）</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script>
-		function updateValues() {
-			var value1 = document.getElementById('input1').value;
-			var value2 = document.getElementById('input2').value;
-			var value3 = document.getElementById('input3').value;
-			var value4 = document.getElementById('input4').value;
-			document.getElementById('values').innerText = 'お疲れ様です。\nご確認よろしくお願いいたします。\n\n' + '売上金額（税抜）:' + value1 + '\nラストオーダー:' + value2 + '\n扉の施錠時間:' + value3 + '\nキャスト退勤時間:' + value4 + '\n廃棄処分:済み';
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>報告（テンプレート）</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        function updateValues() {
+            var value2 = document.getElementById('input2').value;
+            var value3 = document.getElementById('input3').value;
+            var value4 = document.getElementById('input4').value;
+            document.getElementById('values').innerText = 'お疲れ様です。\nご確認よろしくお願いいたします。\n\n' + '売上金額（税抜）:\n'+ 'ラストオーダー:' + value2 + '\n扉の施錠時間:' + value3 + '\nキャスト退勤時間:' + value4 + '\n廃棄処分:済み';
+        }
 
-		function generateRandomNumber(id) {
-			var randomNumber = '20:2' + (Math.floor(Math.random() * 10));
-			document.getElementById(id).value = randomNumber;
-			updateValues();
-		}
-
-		function generateRandomNumber2(id) {
-			var randomNumber = '21:0' + (Math.floor(Math.random() * 10));
-			document.getElementById(id).value = randomNumber;
-			updateValues();
-		}
-
-		function generateRandomNumber3(id) {
-			var date = new Date();
-			var hours = date.getHours();
-			var minutes = date.getMinutes();
+        function generateRandomNumber1(id, start, end) {
+			var randomNumber = start + (Math.floor(Math.random() * (end - start + 1)));
+			var hours = 20
+			var minutes = randomNumber;
 			var time = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
 			document.getElementById(id).value = time;
 			updateValues();
 		}
 
-		function copyToClipboard() {
-			var text = document.getElementById('values').innerText;
-			navigator.clipboard.writeText(text);
+		function generateRandomNumber2(id, start, end) {
+			var randomNumber = start + (Math.floor(Math.random() * (end - start + 1)));
+			var hours = 21
+			var minutes = randomNumber;
+			var time = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+			document.getElementById(id).value = time;
+			updateValues();
 		}
-	</script>
+
+        function generateRandomTime(id) {
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var time = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+            document.getElementById(id).value = time;
+            updateValues();
+        }
+
+        function copyToClipboard() {
+            var text = document.getElementById('values').innerText;
+            navigator.clipboard.writeText(text);
+        }
+    </script>
 </head>
 <body>
-	<h1>報告</h1>
-	<form>
-		<p>
-            <input id="input1" type="text" placeholder="売上金額（税抜）" oninput="updateValues()">
-        </p>
-		<p>
-            <input id="input2" type="text" placeholder="ラストオーダー" oninput="updateValues()">
-		    <button type="button" onclick="generateRandomNumber('input2')">乱数</button><br>
-        </p>
-		<p>
-            <input id="input3" type="text" placeholder="扉の施錠時間" oninput="updateValues()">
-		    <button type="button" onclick="generateRandomNumber2('input3')">乱数</button><br>
-        </p>
-		<p>
-            <input id="input4" type="text" placeholder="キャスト退勤時間" oninput="updateValues()">
-			<button type="button" onclick="generateRandomNumber3('input4')">時間</button><br>
-        </p>
-	</form>
-	<p id="values"></p>
-	<button type="button" onclick="copyToClipboard()">Copy</button>
+    <header>
+        <h1>報告</h1>
+    </header>
+    <main>
+        <form>
+            <div class="form-group">
+                <input id="input2" type="text" placeholder="ラストオーダー" oninput="updateValues()">
+                <button type="button" onclick="generateRandomNumber1('input2', 25, 30)">乱数</button>
+            </div>
+            <div class="form-group">
+                <input id="input3" type="text" placeholder="扉の施錠時間" oninput="updateValues()">
+                <button type="button" onclick="generateRandomNumber2('input3', 0, 10)">乱数</button>
+            </div>
+            <div class="form-group">
+                <input id="input4" type="text" placeholder="キャスト退勤時間" oninput="updateValues()">
+                <button type="button" onclick="generateRandomTime('input4')">時間</button>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="generateRandomNumber1('input2', 25, 30); generateRandomNumber2('input3', 0, 10); generateRandomTime('input4')">全て</button>
+            </div>
+        </form>
+        <div id="values"></div>
+        <button type="button" onclick="copyToClipboard()">Copy</button>
+    </main>
 </body>
 </html>
